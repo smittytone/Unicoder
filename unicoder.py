@@ -64,21 +64,21 @@ def de_code(code):
             print(output([byte_1]))
 
         if num_bytes == 2:
-            byte_1 = 0xC0 + ((code_val & 0xF0) >> 6)
-            byte_2 = 0x80 + (code_val & 0x3F)
+            byte_1 = 0xC0 | ((code_val & 0xF0) >> 6)
+            byte_2 = 0x80 | (code_val & 0x3F)
             print(output([byte_1, byte_2]))
 
         if num_bytes == 3:
-            byte_1 = 0xE0 + ((code_val & 0xF000) >> 12)
-            byte_2 = 0x80 + ((code_val & 0x0FC0) >> 6)
-            byte_3 = 0x80 + (code_val & 0x3F)
+            byte_1 = 0xE0 | ((code_val & 0xF000) >> 12)
+            byte_2 = 0x80 | ((code_val & 0x0FC0) >> 6)
+            byte_3 = 0x80 | (code_val & 0x3F)
             print(output([byte_1, byte_2, byte_3]))
 
         if num_bytes == 4:
-            byte_1 = 0xF0 + ((code_val & 0x1C0000) >> 19)
-            byte_2 = 0x80 + ((code_val & 0x03F000) >> 12)
-            byte_3 = 0x80 + ((code_val & 0x000FC0) >> 6)
-            byte_4 = 0x80 + (code_val & 0x3F)
+            byte_1 = 0xF0 | ((code_val & 0x1C0000) >> 19)
+            byte_2 = 0x80 | ((code_val & 0x03F000) >> 12)
+            byte_3 = 0x80 | ((code_val & 0x000FC0) >> 6)
+            byte_4 = 0x80 | (code_val & 0x3F)
             print(output([byte_1, byte_2, byte_3, byte_4]))
 
         return True
