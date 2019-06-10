@@ -4,7 +4,7 @@
 Unicoder
 
 Version:
-    1.0.0
+    1.0.1
 
 Copyright:
     2019, Tony Smith (@smittytone)
@@ -23,13 +23,13 @@ import sys
 # Application-specific constants                                         #
 ##########################################################################
 
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 
 ##########################################################################
 # Functions                                                              #
 ##########################################################################
 
-def de_code(code):
+def de_code(code, mode):
     """
     Process the specified code.
 
@@ -61,25 +61,25 @@ def de_code(code):
 
         if num_bytes == 1:
             byte_1 = int(code[-2:], 16)
-            print(output([byte_1]))
+            print(output([byte_1], mode))
 
         if num_bytes == 2:
             byte_1 = 0xC0 | ((code_val & 0xF0) >> 6)
             byte_2 = 0x80 | (code_val & 0x3F)
-            print(output([byte_1, byte_2]))
+            print(output([byte_1, byte_2], mode))
 
         if num_bytes == 3:
             byte_1 = 0xE0 | ((code_val & 0xF000) >> 12)
             byte_2 = 0x80 | ((code_val & 0x0FC0) >> 6)
             byte_3 = 0x80 | (code_val & 0x3F)
-            print(output([byte_1, byte_2, byte_3]))
+            print(output([byte_1, byte_2, byte_3], mode))
 
         if num_bytes == 4:
             byte_1 = 0xF0 | ((code_val & 0x1C0000) >> 19)
             byte_2 = 0x80 | ((code_val & 0x03F000) >> 12)
             byte_3 = 0x80 | ((code_val & 0x000FC0) >> 6)
             byte_4 = 0x80 | (code_val & 0x3F)
-            print(output([byte_1, byte_2, byte_3, byte_4]))
+            print(output([byte_1, byte_2, byte_3, byte_4], mode))
 
         return True
     return False
@@ -102,7 +102,7 @@ def output(the_bytes, as_squirrel=True):
         out_str = ""
         end_str = ""
     for a_byte in the_bytes:
-        out_str += "\\x{0:02X}".format(a_byte)
+        out_str += (("\\x" if as_squirrel is True else "") +  "{0:02X}".format(a_byte))
     return out_str + end_str
 
 
@@ -117,10 +117,11 @@ def show_help():
     print("that can be transferred between systems, eg. in JSON.")
     print(" ")
     print("Usage:")
-    print("    unicoder.py [-h] [<UTF-8_code_1> <UTF-8_code_2> ... <UTF-8_code_n>]")
+    print("    unicoder.py [-h][-x] [<UTF-8_code_1> <UTF-8_code_2> ... <UTF-8_code_n>]")
     print(" ")
     print("Options:")
-    print("    -h / --help - Print spasm help information (this screen).")
+    print("    -x / --hex   - Print output as plain hex values, eg. 'EA20AC'.")
+    print("    -h / --help  - Print Unicoder help information (this screen).")
     print(" ")
 
 
@@ -130,18 +131,22 @@ def show_help():
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
+        squirrel_mode = True
         for index, item in enumerate(sys.argv):
             if index > 0:
                 if item in ("-h", "--help"):
                     show_help()
                     sys.exit(0)
+                elif item in ("-x", "--hex"):
+                    squirrel_mode = False
                 elif item[0] == "-":
                     print("ERROR -- unknown option specified (" + item + ")")
                     sys.exit(1)
-                else:
-                    result = de_code(item)
-                    if result is False:
-                        sys.exit(1)
+        for index, item in enumerate(sys.argv):
+            if index > 0 and item[0] != "-":
+                result = de_code(item, squirrel_mode)
+                if result is False:
+                    sys.exit(1)
     else:
         print("ERROR -- no UTF-8 chracter specified (eg. 'U+20AC')")
         sys.exit(1)
