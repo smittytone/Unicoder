@@ -1,4 +1,4 @@
-# Unicoder 1.0.0 #
+# Unicoder 1.0.1 #
 
 Unicoder is a utility for converting UTF-8 character codes, such as U+0024 ($) or U+20AC (€), into sequences of bytes presented as hexadecimal strings.
 
@@ -20,6 +20,9 @@ As you can see from the example above, just call the script with one or more UTF
 
 ## Release Notes ##
 
+- 1.0.1 *Unreleased*
+    - Add -x/--hex option for hex-only output.
+    - Help text cleaned up.
 - 1.0.0 *5 June 2019*
     - Initial release.
 
