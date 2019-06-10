@@ -16,6 +16,18 @@ local unicodeString="\xF0\x90\x8D\x88";
 
 As you can see from the example above, just call the script with one or more UTF-8 codes separated by spaces.
 
+If you don't require Squirrel-oriented output, used the `-x` switch:
+
+```squirrel
+/Users/smitty > ./unicoder.py -x U+20AC U+24 U+0939 U+0025 U+10348
+
+E282AC
+24
+E0A4B9
+25
+F0908D88
+```
+
 **Note** Unicode contains more than 137,000 characters so at this time there is no way to derive a hex string from a character, only that character's UTF-8 code.
 
 ## Release Notes ##
