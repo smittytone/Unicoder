@@ -16,10 +16,10 @@ local unicodeString="\xF0\x90\x8D\x88";
 
 As you can see from the example above, just call the script with one or more UTF-8 codes separated by spaces.
 
-If you don't require Squirrel-oriented output, used the `-x` switch:
+If you don't require Squirrel-oriented output, used the `-j`/`--justhex` switch:
 
 ```squirrel
-/Users/smitty > ./unicoder.py -x U+20AC U+24 U+0939 U+0025 U+10348
+/Users/smitty > ./unicoder.py -j U+20AC U+24 U+0939 U+0025 U+10348
 
 E282AC
 24
@@ -32,8 +32,8 @@ F0908D88
 
 ## Release Notes ##
 
-- 1.0.1 *Unreleased*
-    - Add -x/--hex option for hex-only output.
+- 1.0.1 *12 June 2019*
+    - Add -j/--justhex option for hex-only output.
     - Help text cleaned up.
 - 1.0.0 *5 June 2019*
     - Initial release.
