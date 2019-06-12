@@ -117,11 +117,11 @@ def show_help():
     print("that can be transferred between systems, eg. in JSON.")
     print(" ")
     print("Usage:")
-    print("    unicoder.py [-h][-x] [<UTF-8_code_1> <UTF-8_code_2> ... <UTF-8_code_n>]")
+    print("    unicoder.py [-h][-j] [<UTF-8_code_1> <UTF-8_code_2> ... <UTF-8_code_n>]")
     print(" ")
     print("Options:")
-    print("    -x / --hex   - Print output as plain hex values, eg. 'EA20AC'.")
-    print("    -h / --help  - Print Unicoder help information (this screen).")
+    print("    -j / --justhex   - Print output as plain hex values, eg. 'EA20AC'.")
+    print("    -h / --help      - Print Unicoder help information (this screen).")
     print(" ")
 
 
@@ -137,7 +137,7 @@ if __name__ == '__main__':
                 if item in ("-h", "--help"):
                     show_help()
                     sys.exit(0)
-                elif item in ("-x", "--hex"):
+                elif item in ("-j", "--justhex"):
                     squirrel_mode = False
                 elif item[0] == "-":
                     print("ERROR -- unknown option specified (" + item + ")")
