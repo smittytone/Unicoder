@@ -4,7 +4,7 @@
 Unicoder
 
 Version:
-    1.0.1
+    1.0.2
 
 Copyright:
     2019, Tony Smith (@smittytone)
@@ -19,15 +19,18 @@ License:
 
 import sys
 
+
 ##########################################################################
 # Application-specific constants                                         #
 ##########################################################################
 
-APP_VERSION = "1.0.1"
+APP_VERSION = "1.0.2"
+
 
 ##########################################################################
 # Functions                                                              #
 ##########################################################################
+
 
 def de_code(code, mode):
     """
@@ -84,6 +87,7 @@ def de_code(code, mode):
         return True
     return False
 
+
 def output(the_bytes, as_squirrel=True):
     """
     Format the output string.
@@ -129,6 +133,7 @@ def show_help():
 # Main entry point                                                       #
 ##########################################################################
 
+
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         squirrel_mode = True
@@ -140,7 +145,7 @@ if __name__ == '__main__':
                 elif item in ("-j", "--justhex"):
                     squirrel_mode = False
                 elif item[0] == "-":
-                    print("ERROR -- unknown option specified (" + item + ")")
+                    print("[ERROR] Unknown option specified (" + item + ")")
                     sys.exit(1)
         for index, item in enumerate(sys.argv):
             if index > 0 and item[0] != "-":
@@ -148,5 +153,5 @@ if __name__ == '__main__':
                 if result is False:
                     sys.exit(1)
     else:
-        print("ERROR -- no UTF-8 chracter specified (eg. 'U+20AC')")
+        print("[ERROR] No UTF-8 chracter specified (eg. 'U+20AC')")
         sys.exit(1)
